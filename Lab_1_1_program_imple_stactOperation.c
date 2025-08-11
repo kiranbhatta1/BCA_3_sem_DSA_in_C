@@ -1,61 +1,77 @@
-#include<stdio.h>
-int stack [100],j,choice=0,n,top=-1;
+#include <stdio.h>
+
+int stack[100], top = -1, n;
+
 void push();
 void pop();
 void display();
-void main();
-{
-print("enter the number of element in the stack");
-Scanf("%d",&n);
-printf("Stack operation using array\n");
-printf("\n....\n):
-  while(choice!=4)
-  {
-  printf("Chose one from the below\n");
-  printf("\n1 for push \n 2 for pop \n 3 for display\n 4 for exist");
-printf("\nEnter the choice");
-Switch(choice){
-case 1:
-push();
-break;
-case 4 :
-pop();
-break;
-case 3:
-  display();
-break;
-case 4:
-printf("Exiting..");
- break;
-default :
-printf("Please enter vaild choice");
+
+int main() {
+    int choice;
+
+    printf("Enter the number of elements in the stack: ");
+    scanf("%d", &n);
+
+    printf("Stack operations using array\n");
+    printf("--------------------------------\n");
+
+    while (1) {
+        printf("\nChoose one from the below options:\n");
+        printf("1. Push\n2. Pop\n3. Display\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                push();
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                printf("Exiting...\n");
+                return 0;
+            default:
+                printf("Please enter a valid choice.\n");
+        }
+    }
+
+    return 0;
 }
+
+void push() {
+    int val;
+    if (top == n - 1) {
+        printf("Stack Overflow\n");
+    } else {
+        printf("Enter the value to push: ");
+        scanf("%d", &val);
+        top++;
+        stack[top] = val;
+    }
 }
+
+void pop() {
+    if (top == -1) {
+        printf("Stack Underflow\n");
+    } else {
+        printf("Popped element: %d\n", stack[top]);
+        top--;
+    }
 }
-void push(){
-int val
-if(top==n)
-  printf("enter the value");
- scanf("%d" ,&val);
-top +=top;
-stack[top]=val;
+
+void display() {
+    int i;
+    if (top == -1) {
+        printf("Stack is empty\n");
+    } else {
+        printf("Stack elements are:\n");
+        for (i = top; i >= 0; i--) {
+            printf("%d\n", stack[i]);
+        }
+    }
 }
-}
-void pop()
-{
-if(top==-1)
-  printf("Underflow..");
-else
-  top=top-1;
-}
-void display()
-{
-  for(i=top ;i>=0;i--)
-{
-printf("%d",stack[i]);
-}
-if(top==-1)
-{
-printf("stack is empty");
-}
-}
+
